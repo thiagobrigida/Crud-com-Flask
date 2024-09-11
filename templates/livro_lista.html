@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+    
+{% block conteudo %}
+    {%set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        {% for msg in mensagens %}
+        <div class="message">
+            {{ msg }}
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    <a href="/livro/add">+ Adicionar</a>
+    <table>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Ano de Publicação</th>
+            <th>Edita</th>
+            <th>Remove</th>
+        </tr>
+        {% for livro in dados %}
+        <tr>
+            <td>{{livro.titulo}}</td>
+            <td>{{livro.autor}}</td>
+            <td>{{livro.ano_publicacao}}</td>
+            <td>
+                <a href="/livro/edita/{{livro.id_livro}}">Editar</a>
+            </td>
+            <td>
+                <a href="/livro/remove/{{livro.id_livro}}">Remover</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
